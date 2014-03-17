@@ -34,16 +34,18 @@ class Paste(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.Text)
     pub_date = db.Column(db.DateTime)
+    lang = db.Column(db.String(30))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     parent_id = db.Column(db.Integer, db.ForeignKey('paste.id'))
     parent = db.relationship('Paste', lazy=True, backref='children',
                              uselist=False, remote_side=[id])
 
-    def __init__(self, user, code, parent=None):
+    def __init__(self, user, code, parent=None, lang="default"):
         self.user = user
         self.code = code
         self.pub_date = datetime.utcnow()
         self.parent = parent
+        self.lang = lang
 
 
 class User(db.Model):
@@ -80,7 +82,7 @@ def new_paste():
     if reply_to is not None:
         parent = Paste.query.get(reply_to)
     if request.method == 'POST' and request.form['code']:
-        paste = Paste(g.user, request.form['code'], parent=parent)
+        paste = Paste(g.user, request.form['code'], parent=parent, lang=request.form['lang'])
         db.session.add(paste)
         db.session.commit()
         if parent is not None:
