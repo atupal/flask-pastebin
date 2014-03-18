@@ -1,5 +1,12 @@
 {% extends "layout.html" %}
 {% block title %}Paste #{{ paste.id }}{% endblock %}
+{% block header %}
+<link rel="stylesheet" title="GitHub" href="{{ url_for('static', filename='highlight/styles/github.css') }}">
+<script src="{{ url_for('static', filename='highlight/highlight.pack.js') }}"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+{% endblock %}
 {% block body %}
   <h2>Paste #{{ paste.id }}</h2>
   <dl>
@@ -27,8 +34,10 @@
         <a href="{{ url_for('show_paste', paste_id=child.id) }}">#{{ child.id }}</a>
       {%- endfor %}
     {% endif %}
+    <dt>Lang
+    <dd>{{ paste.lang }}
   </dl>
-  <div class=code><pre>{{ paste.code }}</pre></div>
+  <div class=code><pre><code>{{ paste.code }}</code></pre></div>
   <script type=text/javascript>
     pastebin.subscribePaste({{ paste.id }});
   </script>

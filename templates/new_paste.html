@@ -3,6 +3,11 @@
 {% block body %}
   <h2>New Paste</h2>
   <form action="" method=post>
+    <select name="lang" id="id_lang">
+      {% for lang in ['default', '1c', 'actionscript', 'apache', 'applescript', 'asciidoc', 'autohotkey', 'avrasm', 'axapta', 'bash', 'brainfuck', 'clojure', 'cmake', 'coffeescript', 'cpp', 'cs', 'css', 'delphi', 'diff', 'django', 'd', 'dos', 'elixir', 'erlang', 'erlang-repl', 'fix', 'fsharp', 'gherkin', 'glsl', 'go', 'haml', 'handlebars', 'haskell', 'http', 'ini', 'java', 'javascript', 'json', 'lasso', 'lisp', 'livecodeserver', 'lua', 'makefile', 'markdown', 'mathematica', 'matlab', 'mel', 'mizar', 'monkey', 'nginx', 'nix', 'nsis', 'objectivec', 'ocaml', 'oxygene', 'parser3', 'perl', 'php', 'profile', 'protobuf', 'python', 'rib', 'r', 'rsl', 'ruby', 'ruleslanguage', 'rust', 'scala', 'scilab', 'scss', 'smalltalk', 'sql', 'tex', 'vala', 'vbnet', 'vbscript', 'vhdl', 'vim', 'x86asm', 'xml'] %}
+      <option value="{{ lang }}">{{ lang }}</option>
+    {% endfor %}
+    </select>
     <div class=code><textarea name=code cols=60 rows=18>{{ parent.code }}</textarea></div>
     <p><input type=submit value="New Paste">
   </form>
