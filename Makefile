@@ -1,4 +1,4 @@
 
 debug:
-	python2 manage.py runserver -t 0.0.0.0 -p 5000
+	python2 manage.py runserver -t 0.0.0.0 -p 8888
 
